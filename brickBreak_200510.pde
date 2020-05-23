@@ -4,8 +4,10 @@ int tempMouseX, tempMouseY;
 
 ArrayList<ArrayList> gameObjects;
 ArrayList<Brick> brickList;
+ArrayList<MovingBrick> movingBrickList;
 ArrayList<Breaker> breakerList;
 ArrayList<BounceEffect> bounceList;
+
 
 boolean dl = false;
 int roomHP;

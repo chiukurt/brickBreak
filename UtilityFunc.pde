@@ -33,21 +33,33 @@ void resetGame() {
   gameHeight = int(displayHeight*0.9);
   gameWidth = int(gameHeight*10/16);
 
-  gameObjects = new ArrayList<ArrayList>();
+  gameObjects = new ArrayList<ArrayList>(); //The master arrayList
   brickList = new ArrayList<Brick>();
+  movingBrickList = new ArrayList<MovingBrick>();
   breakerList = new ArrayList<Breaker>();
   bounceList = new ArrayList<BounceEffect>();
 
   for (int i = 0; i < roomHP; i ++) {
+    if (i < 50)
     brickList.add(
       new Brick (
       55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
       60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10));
+      gameWidth/14, 10)
+      );
+      else
+      movingBrickList.add(
+      new MovingBrick (
+      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+      gameWidth/14, 10,
+      100,100,0.007)
+      );
   }
 
   gameObjects.add (bounceList);
   gameObjects.add (brickList);
+  gameObjects.add (movingBrickList);
   gameObjects.add (breakerList);
 }
 
@@ -62,4 +74,12 @@ float normalizeX (float x1, float y1, float x2, float y2) {
 
 float normalizeY (float x1, float y1, float x2, float y2) {
   return 0;
+}
+
+class Point {
+  int x, y;
+  Point (int x, int y) {
+    this.x=x;
+    this.y=y;
+  }
 }
