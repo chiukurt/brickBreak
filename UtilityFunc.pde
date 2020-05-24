@@ -1,4 +1,19 @@
-void renderQueuedObjects(ArrayList<ArrayList> gameObjects) {
+/*void objectListTraverse(ArrayList<ArrayList> List) {
+ for (ArrayList thisList : List) {
+ objectListTraverse(thisList);
+ }
+ }
+ 
+ 
+ void objectMain (Renderable itemToRender) {
+ if (itemToRender.enabled) {
+ itemToRender.render();
+ itemToRender.Main();
+ }
+ }*/
+
+
+void objectListTraverse(ArrayList<ArrayList> gameObjects) {
   for (ArrayList objectTypeList : gameObjects) {
     renderObjectsPerType (objectTypeList);
   }
@@ -12,6 +27,8 @@ void renderObjectsPerType (ArrayList<Renderable> objectTypeList) {
     }
   }
 }
+
+
 
 class Renderable extends Object {
   boolean enabled=true;
@@ -41,25 +58,26 @@ void resetGame() {
 
   for (int i = 0; i < roomHP; i ++) {
     if (i < 50)
-    brickList.add(
-      new Brick (
-      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
-      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10)
-      );
-      else
+      brickList.add(
+        new Brick (
+        55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+        60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+        gameWidth/14, 10)
+        );
+    else
       movingBrickList.add(
-      new MovingBrick (
-      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
-      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10,
-      100,100,0.007)
-      );
+        new MovingBrick (
+        55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+        60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+        gameWidth/14, 10, 
+        100, 100, 0.007)
+        );
   }
 
-  gameObjects.add (bounceList);
   gameObjects.add (brickList);
   gameObjects.add (movingBrickList);
+
+  gameObjects.add (bounceList);
   gameObjects.add (breakerList);
 }
 

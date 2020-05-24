@@ -23,37 +23,47 @@ class Breaker extends Renderable {
   }
 
   void Main() {
+    bounceList.add (new BounceEffect (int(x), int(y), 15, 0.07, -1)); // Trail
     x+=xvel;
     y+=yvel;
 
-    if (x+xvel>=displayWidth/2+gameWidth/2 || x+xvel<displayWidth/2-gameWidth/2){
-          bounceList.add (new BounceEffect (int(x+xvel),int(y+yvel),30));
-      xvel=-xvel;}
-    if (y+yvel>=displayHeight/2+gameHeight/2 || y+yvel<displayHeight/2-gameHeight/2){
-          bounceList.add (new BounceEffect (int(x+xvel),int(y+yvel),30));
-      yvel=-yvel;}
+    // Border collision
+    if (x+xvel>=displayWidth/2+gameWidth/2 || x+xvel<displayWidth/2-gameWidth/2) {
+      bounceList.add (new BounceEffect (int(x+xvel), int(y+yvel), 30, 0.22, 1));
+      xvel=-xvel;
+    }
+    if (y+yvel>=displayHeight/2+gameHeight/2 || y+yvel<displayHeight/2-gameHeight/2) {
+      bounceList.add (new BounceEffect (int(x+xvel), int(y+yvel), 30, 0.22, 1));
+      yvel=-yvel;
+    }
   }
 }
 
 class BounceEffect extends Renderable {
-  int x, y, life;
+  int x, y, size, dir;
+  float life, lifedrain;
 
-  BounceEffect (int x, int y, int life) {
+  BounceEffect (int x, int y, int size, float lifedrain, int dir) {
     this.x = x;
     this.y = y;
-    this.life=life;
+    this.size = size;
+    this.lifedrain=lifedrain;
+    this.dir=dir; // If the effect goes small>big (1) or big>small (-1)
+    life = 1;
   }
 
   void render() {
-    if (true) {
-      fill (0, 0, 0, 0);
-      stroke (255);
-      ellipse (x, y, 30-life, 30-life);
-    }
+    fill (0, 0, 0, 0);
+    stroke (255);
+
+    if (dir == 1)
+      ellipse (x, y, size-life*size, size-life*size);
+    else
+      ellipse (x, y, 1-life*size, 1-life*size);
   }
 
   void Main() {
-    life-=7;
+    life-=lifedrain;
     if (life < 0)
       enabled = false;
   }

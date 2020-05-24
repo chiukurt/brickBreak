@@ -35,8 +35,6 @@ class Brick extends Renderable {
       brickColour-=10;
 
     for (Breaker b : breakerList) {
-
-
       if (b.enabled && collision(
         b.x+b.xvel, 
         b.y+b.yvel, 
@@ -56,10 +54,10 @@ class Brick extends Renderable {
         float angle = toBreaker.heading()+PI;
 
         if ((angle >= 5*PI/4 && angle <= 7*PI/4) || (angle >= PI/4 && angle <= 3*PI/4)) {
-          bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30));
+          bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30, 0.22, 1));
           b.yvel = -b.yvel;
         } else {
-          bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30));
+          bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30, 0.22, 1));
           b.xvel = -b.xvel;
         }
       }
@@ -69,6 +67,7 @@ class Brick extends Renderable {
     if (hp<=0) {
       enabled=false;
       roomHP-=1;
+      bounceList.add (new BounceEffect (int(x), int(y), 200, 0.1, 1));
     }
   }
 }
