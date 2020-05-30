@@ -23,7 +23,7 @@ class Breaker extends Renderable {
   }
 
   void Main() {
-    bounceList.add (new BounceEffect (int(x), int(y), 15, 0.07, -1)); // Trail
+    bounceList.add (new BounceEffect (int(x+random(-2,2)), int(y+random(-3,3)), 15, 0.07, -1)); // Trail
     x+=xvel;
     y+=yvel;
 

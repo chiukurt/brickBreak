@@ -1,8 +1,20 @@
-/*void objectListTraverse(ArrayList<ArrayList> List) {
+
+
+/*
+void objectListTraverse1(ArrayList List) {
+ if (List instanceof ArrayList) {
+ objectListTraverse2 (List);
+ }else{
+ 
+ }
+ }
+ 
+ void objectListTraverse2(ArrayList<ArrayList> List) {
  for (ArrayList thisList : List) {
- objectListTraverse(thisList);
+ objectListTraverse1(thisList);
  }
  }
+ 
  
  
  void objectMain (Renderable itemToRender) {
@@ -10,8 +22,8 @@
  itemToRender.render();
  itemToRender.Main();
  }
- }*/
-
+ }
+ */
 
 void objectListTraverse(ArrayList<ArrayList> gameObjects) {
   for (ArrayList objectTypeList : gameObjects) {
@@ -45,17 +57,7 @@ public boolean collision (float x, float y, float x1, float y1, float x2, float 
   return false;
 }
 
-void resetGame() {
-  roomHP = 77;
-  gameHeight = int(displayHeight*0.9);
-  gameWidth = int(gameHeight*10/16);
-
-  gameObjects = new ArrayList<ArrayList>(); //The master arrayList
-  brickList = new ArrayList<Brick>();
-  movingBrickList = new ArrayList<MovingBrick>();
-  breakerList = new ArrayList<Breaker>();
-  bounceList = new ArrayList<BounceEffect>();
-
+void level0() {
   for (int i = 0; i < roomHP; i ++) {
     if (i < 50)
       brickList.add(
@@ -72,6 +74,27 @@ void resetGame() {
         gameWidth/14, 10, 
         100, 100, 0.007)
         );
+  }
+}
+
+void resetGame() {
+  roomHP = 77;
+  gameHeight = int(displayHeight*0.9);
+  gameWidth = int(gameHeight*10/16);
+
+  gameObjects = new ArrayList<ArrayList>(); //The master arrayList
+  brickList = new ArrayList<Brick>();
+  movingBrickList = new ArrayList<MovingBrick>();
+  breakerList = new ArrayList<Breaker>();
+  bounceList = new ArrayList<BounceEffect>();
+
+  switch (level) {
+  case 0: 
+    level0();
+    break;
+  default: 
+    println ("d");
+    break;
   }
 
   gameObjects.add (brickList);
