@@ -13,7 +13,7 @@ void mousePressed() {
 
 void mouseReleased() {
   mouseDown = false;  // Disables trajectory prediction
-  
+
   //Creates new projectile breaker
   PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
   if (bVel.x!=0 || bVel.y!=0) {
@@ -21,9 +21,7 @@ void mouseReleased() {
     bVel.mult(breakerSpeed);
     breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
   }
-  dl = false; // Disables circular reticule 
-  
-  
+  dl = false; // Disables circular reticule
 }
 
 
@@ -64,8 +62,8 @@ void rayTrace() {//Placeholder function for breaker trajectory prediciton
         }
       }
     }
-    
-     for (MovingBrick b : movingBrickList) {
+
+    for (MovingBrick b : movingBrickList) {
       if (b.enabled && collision(x+xvel, y+yvel, b.x-b.bh/2, b.y- b.bw, b.x+b.bh/2, b.y+ b.bw)) {
         toBreaker.x = (x-b.x);
         toBreaker.y = (y-b.y);

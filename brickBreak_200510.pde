@@ -23,30 +23,15 @@ void setup() {
   textAlign(CENTER);
   textSize(20);
 
-  resetGame();
+  resetScene();
 }
 
+// Room HP dictates number of remaining bricks to break
 void draw() {
-  background (30);
-  stroke (50);
-  fill (50);
-  rect (displayWidth/2, displayHeight/2, gameWidth, gameHeight);
-
-  objectListTraverse(gameObjects);
-  if (mouseDown)
-    rayTrace();
-
-  if (dl) {
-    stroke(255);
-    fill(0, 0, 0, 0);
-    ellipse (tempMouseX, tempMouseY, 
-      getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2, 
-      getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2);
-    line (mouseX, mouseY, tempMouseX, tempMouseY);
-    ellipse (mouseX, mouseY, 5, 5);
-    ellipse (tempMouseX, tempMouseY, 15, 15);
-  }
-  if (roomHP <= 0) {
-    resetGame();
+  if (roomHP > 0) {
+    levelMain();
+  } else {
+    level=1;
+    resetScene();
   }
 }

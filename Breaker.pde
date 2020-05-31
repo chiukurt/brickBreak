@@ -1,4 +1,3 @@
-
 class Breaker extends Renderable {
   int x, y, radius;
   float xvel, yvel;
