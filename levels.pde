@@ -1,10 +1,10 @@
 
+
 void levelIntro(String message) {
   background (50, 50, 50);
   stroke (255);
   fill (255);
-  text (message, displayHeight/2, displayWidth/2);
-  delay (100);
+  text (message, displayWidth/2, displayHeight/2);
 }
 
 void resetScene() {
@@ -20,16 +20,16 @@ void resetScene() {
 
   switch (level) {
   case 0: 
-    levelIntro("Level "+level);
     level0init(); // Change this to the menu
     break;
   case 1: 
-    levelIntro("Level "+level);
     level1init();
     break;
-
+  case 2: 
+    level2init();
+    break;
   default: 
-    println ("default");
+    levelinit();
     break;
   }
 
@@ -92,5 +92,29 @@ void level1init() {
       60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
       gameWidth/14, 10)
       );
+  }
+}
+void level2init() {
+  roomHP = 1;
+  for (int i = 0; i < roomHP; i ++) {
+    brickList.add(
+      new Brick (
+      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+      gameWidth/14, 10)
+      );
+  }
+}
+
+void levelinit() {
+  roomHP = 1;
+  for (int i = 0; i < roomHP; i ++) {
+    movingBrickList.add(
+        new MovingBrick (
+        55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+        60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+        gameWidth/14, 10, 
+        100, 100, 0.007)
+        );
   }
 }

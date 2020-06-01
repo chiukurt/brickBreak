@@ -5,23 +5,27 @@ boolean mouseDown = false;
 boolean dl = false;
 
 void mousePressed() {
-  tempMouseX=mouseX;
-  tempMouseY=mouseY;
-  dl = true; // Enables circular reticule 
-  mouseDown = true; // Enables trajectory prediction
+  if (roomHP>0) {
+    tempMouseX=mouseX;
+    tempMouseY=mouseY;
+    dl = true; // Enables circular reticule 
+    mouseDown = true; // Enables trajectory prediction
+  }
 }
 
 void mouseReleased() {
-  mouseDown = false;  // Disables trajectory prediction
+  if (roomHP>0) {
+    mouseDown = false;  // Disables trajectory prediction
 
-  //Creates new projectile breaker
-  PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
-  if (bVel.x!=0 || bVel.y!=0) {
-    bVel.normalize();
-    bVel.mult(breakerSpeed);
-    breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
+    //Creates new projectile breaker
+    PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
+    if (bVel.x!=0 || bVel.y!=0) {
+      bVel.normalize();
+      bVel.mult(breakerSpeed);
+      breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
+    }
+    dl = false; // Disables circular reticule
   }
-  dl = false; // Disables circular reticule
 }
 
 

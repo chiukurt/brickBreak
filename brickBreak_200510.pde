@@ -14,7 +14,10 @@ int roomHP;
 
 float breakerSpeed = 14;
 
-int level = 0;
+int level = -1;
+int intermissionTimer = 100;
+
+
 
 void setup() {
   size (displayWidth, displayHeight);
@@ -22,16 +25,24 @@ void setup() {
   rectMode(CENTER);
   textAlign(CENTER);
   textSize(20);
-
-  resetScene();
+  roomHP = 0;
+ // resetScene();
 }
 
 // Room HP dictates number of remaining bricks to break
 void draw() {
+  if (keyCode == DOWN) {
+    roomHP=0;
+  }
+
   if (roomHP > 0) {
     levelMain();
+  } else if (roomHP > -intermissionTimer) {
+    roomHP--;
+    levelIntro ("Level "+(level+1) + "   -  "+(-roomHP)+"/100");
+    delay(1);
   } else {
-    level=1;
+    level++;
     resetScene();
   }
 }
