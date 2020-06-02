@@ -27,8 +27,24 @@ void objectListTraverse1(ArrayList List) {
 
 void objectListTraverse(ArrayList<ArrayList> gameObjects) {
   for (ArrayList objectTypeList : gameObjects) {
+    if (tick%100==0) 
+      CleanObjectList(objectTypeList);
     renderObjectsPerType (objectTypeList);
   }
+}
+
+void CleanObjectList  (ArrayList<Renderable> objectTypeList) {
+  int count=0;
+  
+  ArrayList<Renderable> tempList = new ArrayList<Renderable>();
+  for (Renderable itemToPreserve : objectTypeList) {
+    if (itemToPreserve.enabled) 
+      tempList.add(itemToPreserve);
+    else
+      count++;
+  }
+  objectTypeList = tempList;
+  println("Cleaned "+count+" -- Preserved: "+objectTypeList.size());
 }
 
 void renderObjectsPerType (ArrayList<Renderable> objectTypeList) {

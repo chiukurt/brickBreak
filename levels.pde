@@ -8,16 +8,14 @@ void levelIntro(String message) {
 }
 
 void resetScene() {
-
-  gameHeight = int(displayHeight*0.9);
-  gameWidth = int(gameHeight*10/16);
-
   gameObjects = new ArrayList<ArrayList>(); //The master arrayList
+  
   brickList = new ArrayList<Brick>();
   movingBrickList = new ArrayList<MovingBrick>();
   breakerList = new ArrayList<Breaker>();
   bounceList = new ArrayList<BounceEffect>();
 
+  //Populate arrayLists based on level
   switch (level) {
   case 0: 
     level0init(); // Change this to the menu
@@ -35,21 +33,25 @@ void resetScene() {
 
   gameObjects.add (brickList);
   gameObjects.add (movingBrickList);
-
   gameObjects.add (bounceList);
   gameObjects.add (breakerList);
 }
 
 void levelMain() {
+  //Draw borders
   background (30);
   stroke (50);
   fill (50);
   rect (displayWidth/2, displayHeight/2, gameWidth, gameHeight);
 
+  //Main loop for rendering and code of objects within arrayLists
   objectListTraverse(gameObjects);
+
+  //Draw trajectory prediction
   if (mouseDown)
     rayTrace();
 
+  //Draw aiming graphic
   if (dl) {
     stroke(255);
     fill(0, 0, 0, 0);
@@ -107,7 +109,7 @@ void level2init() {
 }
 
 void levelinit() {
-  roomHP = 1;
+  roomHP = level;
   for (int i = 0; i < roomHP; i ++) {
     movingBrickList.add(
         new MovingBrick (
