@@ -9,7 +9,7 @@ void levelIntro(String message) {
 
 void resetScene() {
   gameObjects = new ArrayList<ArrayList>(); //The master arrayList
-  
+
   brickList = new ArrayList<Brick>();
   movingBrickList = new ArrayList<MovingBrick>();
   breakerList = new ArrayList<Breaker>();
@@ -47,21 +47,14 @@ void levelMain() {
   //Main loop for rendering and code of objects within arrayLists
   objectListTraverse(gameObjects);
 
-  //Draw trajectory prediction
+  //Draw aiming graphic reticule and trajectory prediction
   if (mouseDown)
-    rayTrace();
+    aimGraphic();
 
-  //Draw aiming graphic
-  if (dl) {
-    stroke(255);
-    fill(0, 0, 0, 0);
-    ellipse (tempMouseX, tempMouseY, 
-      getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2, 
-      getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2);
-    line (mouseX, mouseY, tempMouseX, tempMouseY);
-    ellipse (mouseX, mouseY, 5, 5);
-    ellipse (tempMouseX, tempMouseY, 15, 15);
-  }
+  //Every 100 ticks, clean disabled items within arrayLists
+  if (tick%100==0) 
+    for (ArrayList objectTypeList : gameObjects) 
+      objectTypeList = CleanObjectList(objectTypeList);
 }
 
 void level0init() {
@@ -112,11 +105,11 @@ void levelinit() {
   roomHP = level;
   for (int i = 0; i < roomHP; i ++) {
     movingBrickList.add(
-        new MovingBrick (
-        55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
-        60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-        gameWidth/14, 10, 
-        100, 100, 0.007)
-        );
+      new MovingBrick (
+      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+      gameWidth/14, 10, 
+      100, 100, 0.007)
+      );
   }
 }

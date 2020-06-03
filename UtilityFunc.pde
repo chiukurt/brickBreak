@@ -1,50 +1,17 @@
 
-
-/*
-void objectListTraverse1(ArrayList List) {
- if (List instanceof ArrayList) {
- objectListTraverse2 (List);
- }else{
- 
- }
- }
- 
- void objectListTraverse2(ArrayList<ArrayList> List) {
- for (ArrayList thisList : List) {
- objectListTraverse1(thisList);
- }
- }
- 
- 
- 
- void objectMain (Renderable itemToRender) {
- if (itemToRender.enabled) {
- itemToRender.render();
- itemToRender.Main();
- }
- }
- */
-
 void objectListTraverse(ArrayList<ArrayList> gameObjects) {
   for (ArrayList objectTypeList : gameObjects) {
-    if (tick%100==0) 
-      CleanObjectList(objectTypeList);
     renderObjectsPerType (objectTypeList);
   }
 }
 
-void CleanObjectList  (ArrayList<Renderable> objectTypeList) {
-  int count=0;
-  
-  ArrayList<Renderable> tempList = new ArrayList<Renderable>();
-  for (Renderable itemToPreserve : objectTypeList) {
+// Returns arrayList of only 'enabled' items
+ArrayList<Renderable> CleanObjectList  (ArrayList<Renderable> objectTypeList) {
+  ArrayList<Renderable> cleanedList = new ArrayList<Renderable>();
+  for (Renderable itemToPreserve : objectTypeList) 
     if (itemToPreserve.enabled) 
-      tempList.add(itemToPreserve);
-    else
-      count++;
-  }
-  objectTypeList = tempList;
-  println("Cleaned "+count+" -- Preserved: "+objectTypeList.size());
+      cleanedList.add(itemToPreserve);
+  return cleanedList;
 }
 
 void renderObjectsPerType (ArrayList<Renderable> objectTypeList) {
@@ -56,8 +23,7 @@ void renderObjectsPerType (ArrayList<Renderable> objectTypeList) {
   }
 }
 
-
-
+// abstract class
 class Renderable extends Object {
   boolean enabled=true;
   void render() {
@@ -72,9 +38,6 @@ public boolean collision (float x, float y, float x1, float y1, float x2, float 
     return true;
   return false;
 }
-
-
-
 
 float getHyp (float x1, float y1, float x2, float y2) {
   return (sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)));

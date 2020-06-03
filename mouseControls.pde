@@ -1,21 +1,18 @@
-// Kurt Chiu 2020-05-10
 
 int tempMouseX, tempMouseY;
 boolean mouseDown = false;
-boolean dl = false;
 
 void mousePressed() {
   if (roomHP>0) {
     tempMouseX=mouseX;
     tempMouseY=mouseY;
-    dl = true; // Enables circular reticule 
-    mouseDown = true; // Enables trajectory prediction
+    mouseDown = true; // Enables trajectory prediction and reticule
   }
 }
 
 void mouseReleased() {
   if (roomHP>0) {
-    mouseDown = false;  // Disables trajectory prediction
+    mouseDown = false;  // Disables trajectory prediction and reticule
 
     //Creates new projectile breaker
     PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
@@ -24,23 +21,29 @@ void mouseReleased() {
       bVel.mult(breakerSpeed);
       breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
     }
-    dl = false; // Disables circular reticule
   }
 }
 
-
-void rayTrace() {//Placeholder function for breaker trajectory prediciton
+void aimGraphic() {//Placeholder function for breaker trajectory prediciton and aiming reticule
   float xvel, yvel;
   PVector pVec = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
+  float x = tempMouseX, y = tempMouseY;
+  PVector toBreaker = new PVector();
+  
+  // Aiming reticule
+  stroke(255);
+  fill(0, 0, 0, 0);
+  ellipse (tempMouseX, tempMouseY, 
+    getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2, 
+    getHyp(mouseX, mouseY, tempMouseX, tempMouseY)*2);
+  line (mouseX, mouseY, tempMouseX, tempMouseY);
+  ellipse (mouseX, mouseY, 5, 5);
+  ellipse (tempMouseX, tempMouseY, 15, 15);
 
   pVec.normalize();
   pVec.mult(breakerSpeed);
-
   xvel = pVec.x;
   yvel = pVec.y;
-
-  float x = tempMouseX, y = tempMouseY;
-  PVector toBreaker = new PVector();
 
   for ( int i = 0; i < 125; i ++) {
     stroke (255, 255, 255, 255-i*2);

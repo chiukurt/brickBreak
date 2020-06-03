@@ -1,6 +1,5 @@
 // Kurt Chiu 2020-05-10
 
-
 //TODO: Recursive arrayList traversal for render queue
 int gameHeight, gameWidth;
 
@@ -41,7 +40,6 @@ void setup() {
 
   roomHP = 0;
   tick = 0;
-  
 }
 
 // Room HP dictates number of remaining bricks to break
@@ -67,7 +65,8 @@ void draw() {
     resetScene();
   }
   
-  stroke (255);
-  fill (255);
-  text (tick, displayWidth/2, displayHeight/2+100);
+}
+
+void debugTextDisplay(){
+
 }
