@@ -16,6 +16,7 @@ class Breaker extends Renderable {
   }
 
   void render() {
+    strokeWeight(1);
     fill (200);
     stroke (200);
     ellipse (x, y, radius, radius);
@@ -52,6 +53,7 @@ class BounceEffect extends Renderable {
   }
 
   void render() {
+    strokeWeight(1);
     fill (0, 0, 0, 0);
     stroke (255);
 

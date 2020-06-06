@@ -1,5 +1,6 @@
 class Brick extends Renderable {
   int x, y, bh, bw, hp;
+  float thp; //thp = total health points
   PVector toBreaker;
   int brickColour=0;
 
@@ -9,6 +10,7 @@ class Brick extends Renderable {
     this.bh = bh;
     this.bw = bw;
     this.hp = hp;
+    this.thp = hp;
     toBreaker = new PVector (0, 0);
   }
 
@@ -18,12 +20,17 @@ class Brick extends Renderable {
     this.bh = bRadius;
     this.bw = bRadius;
     this.hp = hp;
+    this.thp = hp;
     toBreaker = new PVector (0, 0);
   }
 
   void render() {
+    strokeWeight (2);
     fill (brickColour);
-    stroke (0, 200, 250);
+    if (thp > 0)
+      stroke (0, 200*(hp/thp), 250*(hp/thp));
+    else
+      stroke (0, 200, 250);
     rect (x, y, bh, bw);
   }
 

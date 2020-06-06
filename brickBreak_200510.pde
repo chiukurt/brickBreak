@@ -1,6 +1,11 @@
 // Kurt Chiu 2020-05-10
 
 //TODO: Recursive arrayList traversal for render queue
+// Black hole
+// Ball counter
+// Timer bar
+// Score multiplier inversely proportional on how many breakers
+// blackhole to mouse power up
 int gameHeight, gameWidth;
 
 ArrayList<ArrayList> gameObjects;
@@ -36,7 +41,7 @@ void setup() {
   textSize(20);
 
   gameHeight = int(displayHeight*0.9);
-  gameWidth = int(gameHeight*10/16);
+  gameWidth = int(gameHeight*10/18);
 
   roomHP = 0;
   tick = 0;

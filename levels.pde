@@ -60,45 +60,85 @@ void levelMain() {
 void level0init() {
   roomHP = 77;
   for (int i = 0; i < roomHP; i ++) {
-    if (i < 50)
+    if (i < 55)
       brickList.add(
         new Brick (
         55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
         60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-        gameWidth/14, 10)
+        gameWidth/14, 
+        2)
         );
     else
       movingBrickList.add(
         new MovingBrick (
         55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
         60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-        gameWidth/14, 10, 
-        100, 100, 0.007)
+        gameWidth/14, 
+        10, 
+        55+ displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+        -450 + displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+        0.007)
         );
   }
 }
 
 void level1init() {
-  roomHP = 10;
+  roomHP = 40;
   for (int i = 0; i < roomHP; i ++) {
-    brickList.add(
-      new Brick (
-      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
-      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10)
-      );
+    if (i % 2 == 0)
+      brickList.add(
+        new Brick (
+        55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+        60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+        gameWidth/14, 
+        3)
+        );
+    else
+      movingBrickList.add(
+        new MovingBrick (
+        55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+        60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+        gameWidth/14, 
+        3, 
+        55+ displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+        -450 + displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+        0.007)
+        );
   }
 }
 void level2init() {
-  roomHP = 1;
-  for (int i = 0; i < roomHP; i ++) {
+  roomHP = 22;
+  for (int i = 20; i < roomHP+18; i ++) {
     brickList.add(
       new Brick (
-      55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
-      60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10)
+      55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+      60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+      gameWidth/50, 
+      2)
       );
   }
+
+  movingBrickList.add(
+    new MovingBrick (
+    55 + displayWidth/2-gameWidth/2 + int(60 % 10) * (gameWidth/11), 
+    60 + displayHeight/2-gameHeight/2 + int(50 / 10) * 60, 
+    gameWidth/40, 
+    1, 
+    55 + displayWidth/2-gameWidth/2 + int(69 % 10) * (gameWidth/11), 
+    60 + displayHeight/2-gameHeight/2 + int(50 / 10) * 60, 
+    -0.007)
+    );
+
+  movingBrickList.add(
+    new MovingBrick (
+    55 + displayWidth/2-gameWidth/2 + int(70 % 10) * (gameWidth/11), 
+    60 + displayHeight/2-gameHeight/2 + int(60 / 10) * 60, 
+    gameWidth/40, 
+    1, 
+    55 + displayWidth/2-gameWidth/2 + int(79 % 10) * (gameWidth/11), 
+    60 + displayHeight/2-gameHeight/2 + int(60 / 10) * 60, 
+    0.007)
+    );
 }
 
 void levelinit() {
@@ -108,8 +148,11 @@ void levelinit() {
       new MovingBrick (
       55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
       60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
-      gameWidth/14, 10, 
-      100, 100, 0.007)
+      gameWidth/14, 
+      2, 
+      55 + displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
+      -100 + displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
+      0.005)
       );
   }
 }
