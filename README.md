@@ -20,14 +20,17 @@ class Renderable extends Object {
 On any call to level instance creation, each renderable object type will be initialized as an arrayList of that object type and then added to the master arrayList.  
 <pre>
   gameObjects = new ArrayList<ArrayList>(); //The master arrayList
+
   brickList = new ArrayList<Brick>();
+  movingBrickList = new ArrayList<MovingBrick>();
   breakerList = new ArrayList<Breaker>();
   bounceList = new ArrayList<BounceEffect>();
 </pre>
 ...
 <pre>
-  gameObjects.add (bounceList);
   gameObjects.add (brickList);
+  gameObjects.add (movingBrickList);
+  gameObjects.add (bounceList);
   gameObjects.add (breakerList);
 </pre>
 
@@ -73,4 +76,26 @@ Current code used, assuming the brick is a perfect square.
         }
 </pre>
 
+<h2>Breaker magnet attraction to mouse</h2>
+Done using vector addition. 
 
+ - Create a normal vector of the current breaker velocity (bVel)
+ - Create a normal vector between the breaker and the mouse (dVel)
+ - Add the two vectors with a 6:1 ratio between bVel and dVel
+ - Multiply the resulting vector to preserve the overall movement speed of the breaker
+ 
+ <pre> if (magnetOn) {
+      if (x > mouseX || x < mouseX || y > mouseY || y < mouseY) {
+        PVector dVec = new PVector (mouseX-x, mouseY-y);
+        PVector bVec = new PVector (xvel,yvel);
+        dVec.normalize();
+        bVec.normalize();
+        bVec.mult(6);
+        
+        PVector rVec = bVec.add(dVec);
+        rVec.normalize();
+        rVec.mult(breakerSpeed);
+        xvel = rVec.x;
+        yvel = rVec.y;
+      }
+    }</pre>
