@@ -8,6 +8,15 @@ void mousePressed() {
     tempMouseY=mouseY;
     mouseDown = true; // Enables trajectory prediction and reticule
   }
+
+  if (clickTimer > 0) {
+    if (magnetOn)
+      magnetOn=false;
+    else
+      magnetOn=true;
+  }
+
+  clickTimer = 20;
 }
 
 void mouseReleased() {
@@ -29,7 +38,7 @@ void aimGraphic() {//Placeholder function for breaker trajectory prediciton and 
   PVector pVec = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
   float x = tempMouseX, y = tempMouseY;
   PVector toBreaker = new PVector();
-  
+
   // Aiming reticule
   stroke(255);
   fill(0, 0, 0, 0);

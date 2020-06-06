@@ -5,7 +5,6 @@
 // Ball counter
 // Timer bar
 // Score multiplier inversely proportional on how many breakers
-// blackhole to mouse power up
 int gameHeight, gameWidth;
 
 ArrayList<ArrayList> gameObjects;
@@ -32,6 +31,11 @@ int level = -1;
 // Every 100 cycles, disabled objects within arrayLists are removed
 int tick;
 
+// used to time doubleclick. Turns on breaker magnet to mouse if clicked twice within 10 ticks
+int clickTimer;
+
+
+boolean magnetOn = false;
 
 void setup() {
   size (displayWidth, displayHeight);
@@ -50,6 +54,7 @@ void setup() {
 // Room HP dictates number of remaining bricks to break
 void draw() {
   tick++;
+  clickTimer--;
   
   // Level skipping for testing
   if (keyCode == DOWN) {

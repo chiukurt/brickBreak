@@ -23,7 +23,23 @@ class Breaker extends Renderable {
   }
 
   void Main() {
-    bounceList.add (new BounceEffect (int(x+random(-2,2)), int(y+random(-3,3)), 15, 0.07, -1)); // Trail
+    if (magnetOn) {
+      if (x > mouseX || x < mouseX || y > mouseY || y < mouseY) {
+        PVector dVec = new PVector (mouseX-x, mouseY-y);
+        PVector bVec = new PVector (xvel,yvel);
+        dVec.normalize();
+        bVec.normalize();
+        bVec.mult(6);
+        
+        PVector rVec = bVec.add(dVec);
+        rVec.normalize();
+        rVec.mult(breakerSpeed);
+        xvel = rVec.x;
+        yvel = rVec.y;
+      }
+    }
+
+    bounceList.add (new BounceEffect (int(x+random(-2, 2)), int(y+random(-3, 3)), 15, 0.07, -1)); // Trail
     x+=xvel;
     y+=yvel;
 
