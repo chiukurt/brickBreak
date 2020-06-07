@@ -10,6 +10,8 @@ void levelIntro(String message) {
 void resetScene() {
   gameObjects = new ArrayList<ArrayList>(); //The master arrayList
 
+
+  blackHoleList = new ArrayList<BlackHole>();
   brickList = new ArrayList<Brick>();
   movingBrickList = new ArrayList<MovingBrick>();
   breakerList = new ArrayList<Breaker>();
@@ -31,6 +33,9 @@ void resetScene() {
     break;
   }
 
+  magnetOn=false;
+
+  gameObjects.add (blackHoleList);
   gameObjects.add (brickList);
   gameObjects.add (movingBrickList);
   gameObjects.add (bounceList);
@@ -83,7 +88,7 @@ void level0init() {
 }
 
 void level1init() {
-  roomHP = 40;
+ /* roomHP = 40;
   for (int i = 0; i < roomHP; i ++) {
     if (i % 2 == 0)
       brickList.add(
@@ -104,10 +109,8 @@ void level1init() {
         -450 + displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
         0.007)
         );
-  }
-}
-void level2init() {
-  roomHP = 22;
+  }*/
+   roomHP = 22;
   for (int i = 20; i < roomHP+18; i ++) {
     brickList.add(
       new Brick (
@@ -139,6 +142,23 @@ void level2init() {
     60 + displayHeight/2-gameHeight/2 + int(60 / 10) * 60, 
     0.007)
     );
+  
+  
+  
+}
+void level2init() {
+  roomHP=10;
+  blackHoleList.add(new BlackHole(displayWidth/2, displayHeight/2, 8, 250));
+
+  for (int i = 20; i < roomHP+20; i ++) {
+    brickList.add(
+      new Brick (
+      55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/12), 
+      60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+      gameWidth/14, 
+      2)
+      );
+  }
 }
 
 void levelinit() {

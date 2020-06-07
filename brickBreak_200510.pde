@@ -12,13 +12,14 @@ ArrayList<Brick> brickList;
 ArrayList<MovingBrick> movingBrickList;
 ArrayList<Breaker> breakerList;
 ArrayList<BounceEffect> bounceList;
+ArrayList<BlackHole> blackHoleList;
 
 // Used to track remaining amount of bricks
 // Dips into negative values during intermission
 int roomHP; 
 
 // Once roomHP becomes the negative of intermissionTimer, the next level is created
-int intermissionTimer = 100;
+int intermissionTimer = 20;
 
 //Global velocity of all ball breakers
 float breakerSpeed = 14;

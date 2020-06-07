@@ -16,7 +16,7 @@ void mousePressed() {
       magnetOn=true;
   }
 
-  clickTimer = 20;
+  clickTimer = 10;
 }
 
 void mouseReleased() {
