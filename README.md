@@ -1,10 +1,17 @@
-# brickBreak
+<h1>brickBreak</h1>
 Minigame made using OOP. Emphasis on scalability as many features will be added down the line.
 
 Works on android via processing's ability generate an .APK file
 
 
+<h1>Current questions</h1>
 
+  - How to preserve game speed when framerate drops?.. Separate rendering and game loop?
+  - How to separate rendering from main code?.. Multithreading?
+  - How to prevent concurrent arrayList modification error? (modify arraylist and render in separate threads).. Soft copy?
+  - How to do this in a less memory intensive way?..
+
+<h1>Concept Explanation</h1>
 <h2>Render queue concept</h2>
 Any object that can be rendered on screen will extend from the Renderable abstract class.
 <pre>
