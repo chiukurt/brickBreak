@@ -1,35 +1,45 @@
 
 int tempMouseX, tempMouseY;
 boolean mouseDown = false;
+boolean mouseInGame = false;
 
 void mousePressed() {
-  if (roomHP>0) {
-    tempMouseX=mouseX;
-    tempMouseY=mouseY;
-    mouseDown = true; // Enables trajectory prediction and reticule
-  }
+  if (gameOn) {
+    if (roomHP>0) {
+      tempMouseX=mouseX;
+      tempMouseY=mouseY;
+      mouseDown = true; // Enables trajectory prediction and reticule
+    }
 
-  if (clickTimer > 0) {
-    if (magnetOn)
-      magnetOn=false;
-    else
-      magnetOn=true;
-  }
+    if (clickTimer > 0) {
+      if (magnetOn)
+        magnetOn=false;
+      else
+        magnetOn=true;
+    }
 
-  clickTimer = 10;
+    clickTimer = 5;
+    
+    mouseInGame=true;
+  }
 }
 
 void mouseReleased() {
-  if (roomHP>0) {
-    mouseDown = false;  // Disables trajectory prediction and reticule
+  if (gameOn && mouseInGame) {
+    if (roomHP>0) {
+      mouseDown = false;  // Disables trajectory prediction and reticule
 
-    //Creates new projectile breaker
-    PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
-    if (bVel.x!=0 || bVel.y!=0) {
-      bVel.normalize();
-      bVel.mult(breakerSpeed);
-      breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
+      //Creates new projectile breaker
+      PVector bVel = new PVector (mouseX-tempMouseX, mouseY-tempMouseY);
+      if (bVel.x!=0 || bVel.y!=0) {
+        bVel.normalize();
+        bVel.mult(breakerSpeed);
+        breakerList.add (new Breaker (tempMouseX, tempMouseY, 20, bVel.x, bVel.y));
+        breakerCount++;
+      }
     }
+    
+    mouseInGame=false;
   }
 }
 

@@ -63,9 +63,11 @@ class Brick extends Renderable {
         if ((angle >= 5*PI/4 && angle <= 7*PI/4) || (angle >= PI/4 && angle <= 3*PI/4)) {
           bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30, 0.22, 1));
           b.yvel = -b.yvel;
+          score++;
         } else {
           bounceList.add (new BounceEffect (int(b.x+b.xvel*2), int(b.y+b.yvel*2), 30, 0.22, 1));
           b.xvel = -b.xvel;
+          score++;
         }
       }
     }

@@ -29,7 +29,8 @@ void resetScene() {
     level2init();
     break;
   default: 
-    levelinit();
+    //levelinit();
+    level = -2;
     break;
   }
 
@@ -50,7 +51,8 @@ void levelMain() {
   rect (displayWidth/2, displayHeight/2, gameWidth, gameHeight);
 
   //Main loop for rendering and code of objects within arrayLists
-  objectListTraverse(gameObjects);
+  objectListTraverseMain(gameObjects);
+  objectListTraverseRender(gameObjects);
 
   //Draw aiming graphic reticule and trajectory prediction
   if (mouseDown)
@@ -63,9 +65,9 @@ void levelMain() {
 }
 
 void level0init() {
-  roomHP = 77;
-  for (int i = 0; i < roomHP; i ++) {
-    if (i < 55)
+  roomHP = 44;
+  for (int i = 11; i < roomHP+11; i ++) {
+    if (i < 44)
       brickList.add(
         new Brick (
         55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
@@ -79,7 +81,7 @@ void level0init() {
         55+displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
         60+displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
         gameWidth/14, 
-        10, 
+        5, 
         55+ displayWidth/2-gameWidth/2 + int(i % 11) * (gameWidth/12), 
         -450 + displayHeight/2-gameHeight/2 + int(i / 11) * 60, 
         0.007)
@@ -88,29 +90,29 @@ void level0init() {
 }
 
 void level1init() {
- /* roomHP = 40;
-  for (int i = 0; i < roomHP; i ++) {
-    if (i % 2 == 0)
-      brickList.add(
-        new Brick (
-        55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
-        60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
-        gameWidth/14, 
-        3)
-        );
-    else
-      movingBrickList.add(
-        new MovingBrick (
-        55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
-        60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
-        gameWidth/14, 
-        3, 
-        55+ displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
-        -450 + displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
-        0.007)
-        );
-  }*/
-   roomHP = 22;
+  /* roomHP = 40;
+   for (int i = 0; i < roomHP; i ++) {
+   if (i % 2 == 0)
+   brickList.add(
+   new Brick (
+   55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+   60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+   gameWidth/14, 
+   3)
+   );
+   else
+   movingBrickList.add(
+   new MovingBrick (
+   55+displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+   60+displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+   gameWidth/14, 
+   3, 
+   55+ displayWidth/2-gameWidth/2 + int(i % 10) * (gameWidth/11), 
+   -450 + displayHeight/2-gameHeight/2 + int(i / 10) * 60, 
+   0.007)
+   );
+   }*/
+  roomHP = 22;
   for (int i = 20; i < roomHP+18; i ++) {
     brickList.add(
       new Brick (
@@ -142,9 +144,6 @@ void level1init() {
     60 + displayHeight/2-gameHeight/2 + int(60 / 10) * 60, 
     0.007)
     );
-  
-  
-  
 }
 void level2init() {
   roomHP=10;

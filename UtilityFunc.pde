@@ -1,7 +1,13 @@
 
-void objectListTraverse(ArrayList<ArrayList> gameObjects) {
+void objectListTraverseRender(ArrayList<ArrayList> gameObjects) {
   for (ArrayList objectTypeList : gameObjects) {
     renderObjectsPerType (objectTypeList);
+  }
+}
+
+void objectListTraverseMain(ArrayList<ArrayList> gameObjects) {
+  for (ArrayList objectTypeList : gameObjects) {
+    mainObjectsPerType (objectTypeList);
   }
 }
 
@@ -16,10 +22,15 @@ ArrayList<Renderable> CleanObjectList  (ArrayList<Renderable> objectTypeList) {
 
 void renderObjectsPerType (ArrayList<Renderable> objectTypeList) {
   for (Renderable itemToRender : objectTypeList) {
-    if (itemToRender.enabled) {
+    if (itemToRender.enabled) 
       itemToRender.render();
+  }
+}
+
+void mainObjectsPerType (ArrayList<Renderable> objectTypeList) {
+  for (Renderable itemToRender : objectTypeList) {
+    if (itemToRender.enabled) 
       itemToRender.Main();
-    }
   }
 }
 
